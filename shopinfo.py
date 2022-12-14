@@ -27,9 +27,7 @@ Shop_Name=data['results'][0]['shop_name']
 Shop_creation=str(pd.to_datetime(datetime.today()).date() - pd.to_datetime(datetime.fromtimestamp(data['results'][0]['creation_tsz'])).date())
 days=Shop_creation[uu]
 ok =[f'Shop Name {Shop_Name}',f'Shop creation {days}']
-with open(f'{store}.csv' , 'a', encoding='utf8') as done:
-        writer = csv.writer(done)
-        writer.writerow(ok)
+
 
 try:
     r = requests.get(f'https://openapi.etsy.com/v2/shops/{store}/listings/active?&limit=100&api_key={api_key}').text
@@ -61,4 +59,7 @@ for i in data['results']:
     with open(f'{store}.csv' , 'a', encoding='utf8') as done:
         writer = csv.writer(done)
         writer.writerow(cool)
+with open(f'{store}.csv' , 'a', encoding='utf8') as done:
+        writer = csv.writer(done)
+        writer.writerow(ok)
 print("Done!!")
