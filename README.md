@@ -15,6 +15,7 @@ https://www.etsy.com/developers/register
 go terminal and type :
 
 pip install pandas
+
 pip install requests
 
 
