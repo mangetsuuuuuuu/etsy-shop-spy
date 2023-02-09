@@ -22,44 +22,37 @@ try:
 except:
     print("Somthing Wrong !! check Api or StoreName")
     exit()
-data = json.loads(r)
-Shop_Name=data['results'][0]['shop_name']
-Shop_creation=str(pd.to_datetime(datetime.today()).date() - pd.to_datetime(datetime.fromtimestamp(data['results'][0]['creation_tsz'])).date())
-days=Shop_creation[uu]
-ok =[f'Shop Name {Shop_Name}',f'Shop creation {days}']
-
-
-try:
-    r = requests.get(f'https://openapi.etsy.com/v2/shops/{store}/listings/active?&limit=100&api_key={api_key}').text
-except:
-    print("Somthing Wrong !! check Api or StoreName")
-    exit()
-
-
-data = json.loads(r)
-
-
 slm = ['title','price','quantity','views','fav','creation','url','tags']
 
 with open(f'{store}.csv' , 'a', encoding='utf8') as done:
         writer = csv.writer(done)
         writer.writerow(slm)
-for i in data['results']:
-    title=i.get('title')
-    price=i.get('price')
-    quantity=str(+i.get('quantity'))
-    views=str(i.get('views'))
-    fav = str(i.get('num_favorers'))
-    date = str(pd.to_datetime(datetime.today()).date() - pd.to_datetime(datetime.fromtimestamp(i.get('original_creation_tsz'))).date())
-    days=date[uu]
-    url =i.get('url')
-    tags =','.join(i['tags'])
 
-    cool = [title,price,quantity,views,fav,days,url,tags]
-    with open(f'{store}.csv' , 'a', encoding='utf8') as done:
-        writer = csv.writer(done)
-        writer.writerow(cool)
+data = json.loads(r)
+Shop_Name=data['results'][0]['shop_name']
+Shop_creation=str(pd.to_datetime(datetime.today()).date() - pd.to_datetime(datetime.fromtimestamp(data['results'][0]['creation_tsz'])).date())
+days=Shop_creation[uu]
+ok =[f'Shop Name {Shop_Name}',f'Shop creation {days}']
 with open(f'{store}.csv' , 'a', encoding='utf8') as done:
         writer = csv.writer(done)
         writer.writerow(ok)
+page=[1,2,3,4,5]
+for i in page:
+    r = requests.get(f'https://openapi.etsy.com/v2/shops/{store}/listings/active?&limit=100&page={i}&api_key={api_key}').text
+    data = json.loads(r)
+
+    for i in data['results']:
+        title=i.get('title')
+        price=i.get('price')
+        quantity=str(+i.get('quantity'))
+        views=str(i.get('views'))
+        fav = str(i.get('num_favorers'))
+        date = str(pd.to_datetime(datetime.today()).date() - pd.to_datetime(datetime.fromtimestamp(i.get('original_creation_tsz'))).date())
+        days=date[uu]
+        url =i.get('url')
+        tags =','.join(i['tags'])
+        cool = [title,price,quantity,views,fav,days,url,tags]
+        with open(f'{store}.csv' , 'a', encoding='utf8') as done:
+            writer = csv.writer(done)
+            writer.writerow(cool)
 print("Done!!")
