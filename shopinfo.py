@@ -9,7 +9,7 @@ print('''
   / __/   / /  \__ \  \  / 
  / /___  / /  ___/ /  / /  
 /_____/ /_/  /____/  /_/                              
-                        By 0xSp3ar#5560
+                        By Mangetsuuuuuuu
 ''')
 store = input("Enter Store Name : ")
 api_key = input("Enter Your Api : ")
