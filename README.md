@@ -1,7 +1,7 @@
 # etsy-shop-spy
 ![HH](https://media.tenor.com/vhxaixvLUz4AAAAM/stalking-spying.gif)
 
-UPDATE A-2023 : THIS SCRIPT NOT WORKING NOW BECAUSE OF ETSY API V3 , MAYBE IN FUTURE ... 
+UPDATE A-2024 : This Script No Working With New Api , you should have active api created before 2021 , 
 
 this tool can give you informations about products on etsy by shop name
 
